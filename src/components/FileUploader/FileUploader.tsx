@@ -28,7 +28,6 @@ export default function FileUploader() {
   const splittedString = fileContent.split(/\r?\n|\r|\n/g);
   const bestResult = searchBestResult(splittedString)
   const finalResult = bestResultRemake(bestResult)
-  console.log(bestResult);
 
   return (
     <div className='pt-20 font-[family-name:var(--font-geist-sans)]'>
