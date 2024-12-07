@@ -13,8 +13,7 @@ export default async function Home() {
 
   const file = await fs.readFile(process.cwd() + '/src/app/text.txt', 'utf8');
   const splittedString = file.split(/\r?\n|\r|\n/g);
-  
-  function readArray2(arr: string[], searchPattern:string, sortedDigits:string[]) {
+  function readArray(arr: string[], searchPattern:string, sortedDigits:string[]) {
 
     const mainDigitEnd = searchPattern.slice(4,6);
     let j=0;
@@ -28,39 +27,58 @@ export default async function Home() {
         }
         sortedDigits.push(arrCopy[j]);
         const newArray = arrCopy.toSpliced(j,1)
-        readArray2(newArray, arrCopy[j], sortedDigits);
+        readArray(newArray, arrCopy[j], sortedDigits);
         break;
       } 
         j++;
     }
         return sortedDigits;
     }
-
   function searchBestResult(stringArray: string[]){
     const results = [];
     for(let i=0; i<stringArray.length; i++){
-      const result = readArray2(stringArray, stringArray[i], [stringArray[i]]);///or to change to empty array as third arg
+      const result = readArray(stringArray, stringArray[i], [stringArray[i]]);///or to change to empty array as third arg
       results.push(result);
     }
     const lengths = results.map(result=>result.length);
     const longestArrayIdx = lengths.indexOf(Math.max(...lengths));
     const bestResult = results[longestArrayIdx];
-    console.log(results);
     return bestResult;
   }
-
   const bestResult = searchBestResult(splittedString)
-  // searchBestResult(array)
-
-  // const dataJSON = findString()
+  function bestResultRemake(bestResult: string[]){
+    let newArray = [];
+    for(let i=0; i<bestResult.length; i++){
+      if(i===bestResult.length-1){
+        newArray.push(bestResult[i].slice(0,6));
+      } else {
+        newArray.push(bestResult[i].slice(0,4));
+      }
+    }
+    return newArray.join('');
+  }
+  const finalResult = bestResultRemake(bestResult)
   
-  // console.log(dataJSON);
+  console.log(bestResult);
+  console.log(finalResult);
    
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="flex items-center justify-centercenter font-[family-name:var(--font-geist-sans)] p-4">
         <div>
-          {/* <button onClick={searchBestResult}>Click</button> */}
-          <p>{bestResult}</p>
+          <p>{'Найбільша послідовність з тестового файлу:'}</p>
+          {bestResult.map((number,idx) => {
+            return (
+              <div className='inline-block' key={idx}>
+                <span>{' '}</span>
+                <span>{number}</span>
+                <span>{' '}</span>
+                {idx === bestResult.length-1 ? ' ' :  <span>{'> '}</span>}
+              </div>
+            )
+          })}
+          <br/>
+          <p>{'Зібраний пазл з тестового файлу:'}</p>
+          <p>{finalResult}</p>
         </div>
     </div>
   );
