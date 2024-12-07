@@ -8,6 +8,8 @@ export default function FileUploader() {
     
   const [fileContent, setFileContent] = useState('');
 
+
+//функція handleFileUpload написана з використанням GhatGPT
   const handleFileUpload = (event:React.ChangeEvent<HTMLInputElement>) => {
     if(!event.target) return;
     if(!event.target.files) return;
