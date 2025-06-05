@@ -23,7 +23,6 @@
       "@components/*": ["src/components/*"],
       "@types/*": ["src/types/*"],
       "@resources/*": ["src/resources/*"],
-      "@lib/*": ["src/lib/*"],
       "@types": ["src/types"] 
     }
   },

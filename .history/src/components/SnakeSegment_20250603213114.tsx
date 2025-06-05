@@ -1,8 +1,15 @@
 import drawImage from './Image';
-import { SPRITES } from '@resources/constants/images';
-import { SnakeSegmentInt, SnakeInterface } from '@types';
+import { SPRITES } from '@/resources/constants/images';
+import { SnakeInterface } from './Snake';
 
-
+interface SnakeSegmentInt {
+    segmentCoord:{x:number, y:number}| undefined,
+    head: boolean,
+    body: boolean,
+    tail: boolean,
+    lastTailCoord: {x:number, y:number},
+    ///to add methods of SnakeSegment class???
+}
 type HeadDirection = 'toLeft' | 'toRight' | 'down' | 'up';
 
 export default class SnakeSegment implements SnakeSegmentInt {
@@ -130,20 +137,6 @@ export default class SnakeSegment implements SnakeSegmentInt {
       lastTailCoord: newLastTailCoordinates,
     }
   }
-
-  updateBody(context: CanvasRenderingContext2D, direction: HeadDirection, snake: SnakeInterface, prevCoord: {x: number, y: number}) {
-  const segment = new SnakeSegment(prevCoord, false, true, false, this.lastTailCoord);
-  segment.createSegment('body', context, direction);
-  return segment;
-}
-
-updateTail(context: CanvasRenderingContext2D, direction: HeadDirection, snake: SnakeInterface) {
-  const last = snake.headHistory[snake.headHistory.length - 1];
-  const segment = new SnakeSegment(last, false, false, true, this.lastTailCoord);
-  segment.createSegment('tail', context, direction);
-  return segment;
-}
-
   // updateTail(context:CanvasRenderingContext2D, direction:HeadDirection, snake:SnakeInterface) {
   // const oldSegmentsTail = snake.segments.tail;
   // let newCoordinates:{x:number, y:number};

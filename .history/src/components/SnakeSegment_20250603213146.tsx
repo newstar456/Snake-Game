@@ -1,8 +1,15 @@
 import drawImage from './Image';
-import { SPRITES } from '@resources/constants/images';
-import { SnakeSegmentInt, SnakeInterface } from '@types';
+import { SPRITES } from '@/resources/constants/images';
+import { SnakeInterface } from './Snake';
 
-
+interface SnakeSegmentInt {
+    segmentCoord:{x:number, y:number}| undefined,
+    head: boolean,
+    body: boolean,
+    tail: boolean,
+    lastTailCoord: {x:number, y:number},
+    ///to add methods of SnakeSegment class???
+}
 type HeadDirection = 'toLeft' | 'toRight' | 'down' | 'up';
 
 export default class SnakeSegment implements SnakeSegmentInt {

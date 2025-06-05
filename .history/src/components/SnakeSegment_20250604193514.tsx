@@ -1,5 +1,5 @@
 import drawImage from './Image';
-import { SPRITES } from '@resources/constants/images';
+import { SPRITES } from '@/resources/constants/images';
 import { SnakeSegmentInt, SnakeInterface } from '@types';
 
 

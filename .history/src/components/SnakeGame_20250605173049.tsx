@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState, useRef} from 'react'
 // import SingleCell from './SingleCell';
-import Snake from '../lib/SNake';
+// import Snake from './Snake';
 // import SnakeSegment from "./SnakeSegment";
 import {HeadDirection,SnakeInterface} from '@types'
 

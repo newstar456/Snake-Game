@@ -1,0 +1,1 @@
+export type HeadDirection = 'toLeft' | 'toRight' | 'down' | 'up';

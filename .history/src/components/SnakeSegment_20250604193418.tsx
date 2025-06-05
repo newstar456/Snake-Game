@@ -1,6 +1,7 @@
 import drawImage from './Image';
-import { SPRITES } from '@resources/constants/images';
-import { SnakeSegmentInt, SnakeInterface } from '@types';
+import { SPRITES } from '@/resources/constants/images';
+import { SnakeInterface } from './Snake';
+import { SnakeSegmentInt } from '@types';
 
 
 type HeadDirection = 'toLeft' | 'toRight' | 'down' | 'up';
