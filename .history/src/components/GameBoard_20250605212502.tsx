@@ -28,9 +28,8 @@ const GameBoard = () => {
     };
 
     const loop = () => {
-
+        debugger;
       snakeRef.current?.move();
-              // debugger;
       render();
     };
 

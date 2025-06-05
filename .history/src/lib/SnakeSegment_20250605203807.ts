@@ -1,4 +1,3 @@
-import { preloadImage, getImage } from './ImageLoader';
 export type SegmentType = 'head' | 'body' | 'tail';
 
 export default class SnakeSegment {
@@ -22,13 +21,20 @@ export default class SnakeSegment {
   }
 
   draw(ctx: CanvasRenderingContext2D, size: number) {
-    const src = this.getImageSrc();
-    const img = preloadImage(src);
-    img.onload = () => {
-      ctx.drawImage(img, this.x * size, this.y * size, size, size);
-    };
-    if (img.complete) {
-      ctx.drawImage(img, this.x * size, this.y * size, size, size);
+    switch (this.type) {
+      case 'head':
+        ctx.fillStyle = 'green';
+        break;
+      case 'body':
+        ctx.fillStyle = 'lime';
+        break;
+      case 'tail':
+        ctx.fillStyle = 'darkgreen';
+        break;
     }
+
+    ctx.fillRect(this.x * size, this.y * size, size, size);
+    ctx.strokeStyle = '#000';
+    ctx.strokeRect(this.x * size, this.y * size, size, size);
   }
 }

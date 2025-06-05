@@ -11,8 +11,9 @@ const GameBoard = () => {
   const cellSize = 20;
 
   useEffect(() => {
-
     const canvas = canvasRef.current;
+    console.log(canvasRef);
+    console.log(canvas);
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
 
@@ -28,9 +29,7 @@ const GameBoard = () => {
     };
 
     const loop = () => {
-
       snakeRef.current?.move();
-              // debugger;
       render();
     };
 

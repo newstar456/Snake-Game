@@ -22,13 +22,10 @@ export default class SnakeSegment {
   }
 
   draw(ctx: CanvasRenderingContext2D, size: number) {
-    const src = this.getImageSrc();
-    const img = preloadImage(src);
+    const img = new Image();
+    img.src = this.getImageSrc();
     img.onload = () => {
       ctx.drawImage(img, this.x * size, this.y * size, size, size);
     };
-    if (img.complete) {
-      ctx.drawImage(img, this.x * size, this.y * size, size, size);
-    }
   }
 }
