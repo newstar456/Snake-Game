@@ -28,7 +28,9 @@ const GameBoard = () => {
     };
 
     const loop = () => {
+
       snakeRef.current?.move();
+              // debugger;
       render();
     };
 
@@ -38,17 +40,20 @@ const GameBoard = () => {
       const snake = snakeRef.current;
       if (!snake) return;
 
-      const dir = snake.direction;
-      if ((e.key === 'ArrowUp' || e.key === 'w') && (dir === 'left' || dir === 'right')) {
-        snake.setDirection('up');
-      } else if ((e.key === 'ArrowDown' || e.key === 's') && (dir === 'left' || dir === 'right')) {
-        snake.setDirection('down');
-      } else if ((e.key === 'ArrowLeft' || e.key === 'a') && (dir === 'up' || dir === 'down')) {
-        snake.setDirection('left');
-      } else if ((e.key === 'ArrowRight' || e.key === 'd') && (dir === 'up' || dir === 'down')) {
-        snake.setDirection('right');
+      switch (e.key) {
+        case 'ArrowUp':
+          snake.setDirection('up');
+          break;
+        case 'ArrowDown':
+          snake.setDirection('down');
+          break;
+        case 'ArrowLeft':
+          snake.setDirection('left');
+          break;
+        case 'ArrowRight':
+          snake.setDirection('right');
+          break;
       }
-
     };
 
     window.addEventListener('keydown', handleKeyDown);

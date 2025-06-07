@@ -49,6 +49,22 @@ const GameBoard = () => {
         snake.setDirection('right');
       }
 
+      // return { ...prevSnake };
+
+      // switch (e.key) {
+      //   case 'ArrowUp':
+      //     snake.setDirection('up');
+      //     break;
+      //   case 'ArrowDown':
+      //     snake.setDirection('down');
+      //     break;
+      //   case 'ArrowLeft':
+      //     snake.setDirection('left');
+      //     break;
+      //   case 'ArrowRight':
+      //     snake.setDirection('right');
+      //     break;
+      // }
     };
 
     window.addEventListener('keydown', handleKeyDown);

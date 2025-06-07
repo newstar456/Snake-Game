@@ -1,5 +1,5 @@
 const images: Record<string, HTMLImageElement> = {};
-const imagePromises: { [key: string]: Promise<HTMLImageElement> | undefined } = {};
+const imagePromises: Record<string, Promise<HTMLImageElement>> = {};
 
 export function preloadImage(src: string):Promise<HTMLImageElement>  {
 

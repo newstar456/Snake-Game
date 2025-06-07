@@ -1,5 +1,4 @@
 import SnakeSegment from './SnakeSegment';
-import GameField from './GameField';
 
 export default class Snake {
 
@@ -8,7 +7,7 @@ export default class Snake {
   direction: 'up' | 'down' | 'left' | 'right' = 'left';
   cellSize: number;
 
-  constructor(startX: number, startY: number, cellSize: number) {
+  constructor(startX: number, startY: number, cellSize: number, initialDirection: 'left' | 'right' | 'up' | 'down') {
     this.cellSize = cellSize;
     for (let i = 0; i < 5; i++) {
       const type = i === 0 ? 'head' : (i === 4 ? 'tail' : 'body');
@@ -20,6 +19,7 @@ export default class Snake {
 
   move() {
     const head = this.segments[0];
+    console.log(this.movementHistory);
     const newHead = new SnakeSegment(head.x, head.y, 'head', this.direction);
 
     switch (this.direction) {
@@ -39,8 +39,12 @@ export default class Snake {
         segment.y = this.movementHistory[historyIndex].y;
       }
     });
+
     head.x = newHead.x;
     head.y = newHead.y;
+    // if (this.movementHistory.length > this.segments.length + 1) {
+    //   this.movementHistory.pop();
+    // }
     this.movementHistory.pop();
   }
 
@@ -49,32 +53,6 @@ export default class Snake {
       segment.draw(ctx, this.cellSize);
     }
   }
-
-  // update(field: GameField): boolean {
-  //   const head = this.segments[0];
-  //   const nextX = head.x + (this.direction === 'right' ? 20 : this.direction === 'left' ? -20 : 0);
-  //   const nextY = head.y + (this.direction === 'down' ? 20 : this.direction === 'up' ? -20 : 0);
-  //   const nextCell = field.getCell(nextX, nextY);
-  //   if (!nextCell || !nextCell.isWalkable) {
-  //     return false;
-  //   }
-  //   this.movementHistory.unshift({ x: nextX, y: nextY });
-  //   this.movementHistory.pop();
-
-  //   this.segments.forEach((segment, i) => {
-  //     if (segment.type === 'tail') {
-  //       segment.lastTailPosition = { x: segment.x, y: segment.y };
-  //     }
-  //     const newPos = this.movementHistory[i];
-  //     if (newPos) {
-  //       segment.x = newPos.x;
-  //       segment.y = newPos.y;
-  //     }
-  //   });
-  //   head.x = nextX;
-  //   head.y = nextY;
-  //   return true;
-  // }
 
   setDirection(newDirection: 'up' | 'down' | 'left' | 'right') {
     if (
@@ -87,5 +65,4 @@ export default class Snake {
     }
     this.direction = newDirection;
   }
-
 }

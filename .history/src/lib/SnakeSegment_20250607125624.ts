@@ -24,6 +24,11 @@ export default class SnakeSegment {
   async draw(ctx: CanvasRenderingContext2D, size: number) {
     const src = await this.getImageSrc();
     const img = await preloadImage(src);
-    ctx.drawImage(img, this.x * size, this.y * size, size, size);
+    // img.onload = () => {
+    //   ctx.drawImage(img, this.x * size, this.y * size, size, size);
+    // };
+    // if (img.complete) {
+    //   ctx.drawImage(img, this.x * size, this.y * size, size, size);
+    // }
   }
 }

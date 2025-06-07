@@ -50,31 +50,31 @@ export default class Snake {
     }
   }
 
-  // update(field: GameField): boolean {
-  //   const head = this.segments[0];
-  //   const nextX = head.x + (this.direction === 'right' ? 20 : this.direction === 'left' ? -20 : 0);
-  //   const nextY = head.y + (this.direction === 'down' ? 20 : this.direction === 'up' ? -20 : 0);
-  //   const nextCell = field.getCell(nextX, nextY);
-  //   if (!nextCell || !nextCell.isWalkable) {
-  //     return false;
-  //   }
-  //   this.movementHistory.unshift({ x: nextX, y: nextY });
-  //   this.movementHistory.pop();
+  update(field: GameField): boolean {
+    const head = this.segments[0];
+    const nextX = head.x + (this.direction === 'right' ? 20 : this.direction === 'left' ? -20 : 0);
+    const nextY = head.y + (this.direction === 'down' ? 20 : this.direction === 'up' ? -20 : 0);
+    const nextCell = field.getCell(nextX, nextY);
+    if (!nextCell || !nextCell.isWalkable) {
+      return false;
+    }
+    this.movementHistory.unshift({ x: nextX, y: nextY });
+    this.movementHistory.pop();
 
-  //   this.segments.forEach((segment, i) => {
-  //     if (segment.type === 'tail') {
-  //       segment.lastTailPosition = { x: segment.x, y: segment.y };
-  //     }
-  //     const newPos = this.movementHistory[i];
-  //     if (newPos) {
-  //       segment.x = newPos.x;
-  //       segment.y = newPos.y;
-  //     }
-  //   });
-  //   head.x = nextX;
-  //   head.y = nextY;
-  //   return true;
-  // }
+    this.segments.forEach((segment, i) => {
+      if (segment.type === 'tail') {
+        segment.lastTailPosition = { x: segment.x, y: segment.y };
+      }
+      const newPos = this.movementHistory[i];
+      if (newPos) {
+        segment.x = newPos.x;
+        segment.y = newPos.y;
+      }
+    });
+    head.x = nextX;
+    head.y = nextY;
+    return true;
+  }
 
   setDirection(newDirection: 'up' | 'down' | 'left' | 'right') {
     if (

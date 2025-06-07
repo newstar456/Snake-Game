@@ -21,9 +21,14 @@ export default class SnakeSegment {
     return `/assets/snake/${this.type}-${this.direction}.png`;
   }
 
-  async draw(ctx: CanvasRenderingContext2D, size: number) {
-    const src = await this.getImageSrc();
-    const img = await preloadImage(src);
-    ctx.drawImage(img, this.x * size, this.y * size, size, size);
+  draw(ctx: CanvasRenderingContext2D, size: number) {
+    const src = this.getImageSrc();
+    const img = preloadImage(src);
+    img.onload = () => {
+      ctx.drawImage(img, this.x * size, this.y * size, size, size);
+    };
+    if (img.complete) {
+      ctx.drawImage(img, this.x * size, this.y * size, size, size);
+    }
   }
 }

@@ -29,9 +29,4 @@ export default class GameField {
       }
     }
   }
-
-  getCell(x: number, y: number): GameCell | undefined {
-    if (!this.cells) return undefined;
-    return this.cells.flat().find(cell => cell.x === x && cell.y === y);
-  }
 }
