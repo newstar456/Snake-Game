@@ -1,7 +1,7 @@
 import SnakeSegment from './SnakeSegment';
 
 export default class Snake {
-
+  
   segments: SnakeSegment[] = [];
   movementHistory: { x: number; y: number }[] = [];
   direction: 'up' | 'down' | 'left' | 'right' = 'left';
@@ -15,8 +15,6 @@ export default class Snake {
       const segment = new SnakeSegment(startX + i, startY, type, this.direction);
       this.segments.push(segment);
     }
-
-    console.log(this.movementHistory);
   }
 
   move() {

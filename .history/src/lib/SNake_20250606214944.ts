@@ -1,7 +1,6 @@
 import SnakeSegment from './SnakeSegment';
 
 export default class Snake {
-
   segments: SnakeSegment[] = [];
   movementHistory: { x: number; y: number }[] = [];
   direction: 'up' | 'down' | 'left' | 'right' = 'left';
@@ -9,14 +8,16 @@ export default class Snake {
 
   constructor(startX: number, startY: number, cellSize: number, initialDirection: 'left' | 'right' | 'up' | 'down') {
     this.cellSize = cellSize;
+    this.direction = initialDirection;
 
     for (let i = 0; i < 5; i++) {
       const type = i === 0 ? 'head' : (i === 4 ? 'tail' : 'body');
       const segment = new SnakeSegment(startX + i, startY, type, this.direction);
       this.segments.push(segment);
     }
-
-    console.log(this.movementHistory);
+    for (let i = 0; i <= this.segments.length; i++) {
+      this.movementHistory.push({ x: startX, y: startY });
+    }
   }
 
   move() {
@@ -37,16 +38,14 @@ export default class Snake {
         newHead.x += 1;
         break;
     }
-
+    this.movementHistory.unshift({ ...newHead });
     this.segments[0].type = 'body';
 
-    const tail = this.segments[this.segments.length - 1];
-    tail.lastTailPosition = { x: tail.x, y: tail.y };
-
-    this.segments.pop();
-    this.segments.unshift(newHead);
-
-    this.segments[this.segments.length - 1].type = 'tail';
+    // const tail = this.segments[this.segments.length - 1];
+    // tail.lastTailPosition = { x: tail.x, y: tail.y };
+    // this.segments.pop();
+    // this.segments.unshift(newHead);
+    // this.segments[this.segments.length - 1].type = 'tail';
   }
 
   draw(ctx: CanvasRenderingContext2D) {

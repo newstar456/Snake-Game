@@ -5,8 +5,8 @@ export default class SnakeSegment {
   x: number;
   y: number;
   type: SegmentType;
-  direction: 'up' | 'down' | 'left' | 'right';
   lastTailPosition?: { x: number; y: number };
+  direction: 'up' | 'down' | 'left' | 'right';
 
   constructor(x: number, y: number, type: SegmentType, direction: 'up' | 'down' | 'left' | 'right') {
     this.x = x;

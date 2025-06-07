@@ -15,7 +15,9 @@ export default class Snake {
       const segment = new SnakeSegment(startX + i, startY, type, this.direction);
       this.segments.push(segment);
     }
-
+    for (let i = 0; i <= this.segments.length; i++) {
+      this.movementHistory.push({ x: startX, y: startY });
+    }
     console.log(this.movementHistory);
   }
 

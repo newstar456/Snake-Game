@@ -1,13 +1,11 @@
 import SnakeSegment from './SnakeSegment';
 
 export default class Snake {
-
   segments: SnakeSegment[] = [];
-  movementHistory: { x: number; y: number }[] = [];
   direction: 'up' | 'down' | 'left' | 'right' = 'left';
   cellSize: number;
 
-  constructor(startX: number, startY: number, cellSize: number, initialDirection: 'left' | 'right' | 'up' | 'down') {
+  constructor(startX: number, startY: number, cellSize: number) {
     this.cellSize = cellSize;
 
     for (let i = 0; i < 5; i++) {
@@ -15,8 +13,6 @@ export default class Snake {
       const segment = new SnakeSegment(startX + i, startY, type, this.direction);
       this.segments.push(segment);
     }
-
-    console.log(this.movementHistory);
   }
 
   move() {

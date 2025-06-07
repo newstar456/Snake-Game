@@ -14,9 +14,11 @@ export default class Snake {
       const type = i === 0 ? 'head' : (i === 4 ? 'tail' : 'body');
       const segment = new SnakeSegment(startX + i, startY, type, this.direction);
       this.segments.push(segment);
+      // console.log(segment);
     }
-
-    console.log(this.movementHistory);
+    for (let i = 0; i <= this.segments.length; i++) {
+      this.movementHistory.push({ x: startX, y: startY });
+    }
   }
 
   move() {
