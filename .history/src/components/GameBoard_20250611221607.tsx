@@ -30,7 +30,7 @@ const GameBoard = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       switch (gameStatus.current) {
         case 'start': drawOverlayText("Start of the game - Press Any Key"); return;
-        case 'paused': drawOverlayText(`Game paused, ${score.current} points - Press Any Key`); return;
+        case 'paused': drawOverlayText("Game paused - Press Any Key"); return;
         case 'ended': drawOverlayText(`Game completed, ${score.current} points`); return;
         case 'stopped': drawOverlayText(`Game stopped, ${score.current} points`); return;
       }

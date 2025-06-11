@@ -30,7 +30,7 @@ const GameBoard = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       switch (gameStatus.current) {
         case 'start': drawOverlayText("Start of the game - Press Any Key"); return;
-        case 'paused': drawOverlayText(`Game paused, ${score.current} points - Press Any Key`); return;
+        case 'paused': drawOverlayText("Game paused - Press Any Key"); return;
         case 'ended': drawOverlayText(`Game completed, ${score.current} points`); return;
         case 'stopped': drawOverlayText(`Game stopped, ${score.current} points`); return;
       }
@@ -39,11 +39,10 @@ const GameBoard = () => {
       snakeRef.current?.draw(ctx);
       ctx.fillStyle = "#000";
       ctx.font = "16px Arial";
-      ctx.fillText(`Score: ${score.current}`,50, 20);
+      ctx.fillText(`Score: ${score.current}`, 10, 20);
     };
 
     const loop = () => {
-      if (gameStatus.current !== 'running') return; 
       const snake = snakeRef.current;
       const field = fieldRef.current;
       if (!snake || !field) return;
@@ -56,7 +55,6 @@ const GameBoard = () => {
       const head = snake.segments[0];
       if (bonus && head.x === bonus.x && head.y === bonus.y) {
         snake.grow();
-        score.current += bonus.value;
         bonus = null;
         if (bonusTimeout) clearTimeout(bonusTimeout);
         bonusTimeout = setTimeout(() => {
@@ -65,6 +63,9 @@ const GameBoard = () => {
       }
       render();
     };
+
+    const interval = setInterval(loop, 500);
+
     const drawOverlayText = (text: string) => {
       if (!ctx) return;
       ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
@@ -75,11 +76,10 @@ const GameBoard = () => {
       ctx.fillText(text, canvas.width / 2, canvas.height / 2);
     };
 
-    const interval = setInterval(loop, 500);
-
     const handleKeyDown = (e: KeyboardEvent) => {
       if (gameStatus.current === 'start') {
         gameStatus.current = 'running';
+        // bonus = Bonus.createRandom(snakeRef.current!.getCoordinates(), fieldRef.current!);
         score.current = 0;
         render();
         return;
@@ -123,7 +123,7 @@ const GameBoard = () => {
     };
     bonus = Bonus.createRandom(snakeRef.current.getCoordinates(), fieldRef.current);
     window.addEventListener('keydown', handleKeyDown);
-    render();
+
     return () => {
       clearInterval(interval);
       window.removeEventListener('keydown', handleKeyDown);
